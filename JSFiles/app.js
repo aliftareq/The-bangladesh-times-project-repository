@@ -16,7 +16,6 @@ const loadCatagory = async () => {
 }
 
 //displaying catagories
-
 const displayCatagory = (catagories) => {
     //console.log(catagories)
     const newsCatagories = document.getElementById('news-catagories')
@@ -31,7 +30,9 @@ const displayCatagory = (catagories) => {
     })
 }
 
+//loading news with its id
 const loadNews = (categoryId) => {
+    //start spinning
     toggleSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
     fetch(url)
@@ -42,8 +43,10 @@ const loadNews = (categoryId) => {
         })
 }
 
+//displaying news with event handler
 const disPlayNews = (newses) => {
     //console.log(newses)
+    // sorting newes according to their view.
     const sortNewses = newses.sort(function (a, b) {
         return a.category_id.localeCompare(b.category_id) || b.total_view - a.total_view;
     });
@@ -100,9 +103,11 @@ const disPlayNews = (newses) => {
         `
         newsContainer.appendChild(newsDiv)
     })
+    //stop spinning
     toggleSpinner(false)
 }
 
+//spinning decalarebale function
 const toggleSpinner = (isLoading) => {
     const loaderSection = document.getElementById('spinner');
     if (isLoading) {
@@ -113,6 +118,7 @@ const toggleSpinner = (isLoading) => {
     }
 }
 
+//newsDetailsloading function declared here
 const loadNewsDetails = (newsId) => {
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`
     fetch(url)
@@ -123,7 +129,7 @@ const loadNewsDetails = (newsId) => {
         })
 }
 
-
+// displaying newsDetails with help of event handlar
 const displayNewsDetails = (newsDetails) => {
     console.log(newsDetails, 'paichi')
     const newsModal = document.getElementById('newsModalBody')
