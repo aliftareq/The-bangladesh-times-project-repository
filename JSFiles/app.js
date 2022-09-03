@@ -32,6 +32,7 @@ const displayCatagory = (catagories) => {
 }
 
 const loadNews = (categoryId) => {
+    toggleSpinner(true)
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
     fetch(url)
         .then(res => res.json())
@@ -42,7 +43,6 @@ const loadNews = (categoryId) => {
 }
 
 const disPlayNews = (newses) => {
-    toggleSpinner(true)
     //console.log(newses)
     const sortNewses = newses.sort(function (a, b) {
         return a.category_id.localeCompare(b.category_id) || b.total_view - a.total_view;
@@ -146,7 +146,6 @@ const displayNewsDetails = (newsDetails) => {
     </div>
     `
 }
-
-
-
+//calling a the main functions
+loadNews('01')
 loadCatagory()
