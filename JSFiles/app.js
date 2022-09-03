@@ -45,8 +45,58 @@ const disPlayNews = (newses) => {
     const sortNewses = newses.sort(function (a, b) {
         return a.category_id.localeCompare(b.category_id) || b.total_view - a.total_view;
     });
+    //news number
+    const newsNumber = document.getElementById('item-number')
+    if (sortNewses.length > 0) {
+        newsNumber.innerText = `${sortNewses.length} items found for  this category`
+    }
+    else {
+        newsNumber.innerText = `No news item found for this catagory`
+    }
+    const newsContainer = document.getElementById('newContainer')
+    newsContainer.innerHTML = ``;
     sortNewses.forEach(news => {
         console.log(news)
+        const newsDiv = document.createElement("div")
+        newsDiv.innerHTML = `
+        <div class="card mb-3" style="width: 100%;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="${news.image_url}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">${news.title}</h5>
+                <p class="card-text">${news.details.slice(0, 320)}.............<b>read the full stroy</b></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img src="${news.author.img}" width="40" height="40" alt="">
+                        <div class="mx-2">
+                            <b>${news.author.name ? news.author.name : 'No data available'}</b> <br>
+                            ${news.author.published_date ? news.author.published_date : 'No data available'}
+                        </div>
+                    </div>
+                    <div class="fw-bold">
+                        <i class="fa-solid fa-eye"></i>
+                        ${news.total_view ? news.total_view : 'No data available'}
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        `
+        newsContainer.appendChild(newsDiv)
     })
 }
 
