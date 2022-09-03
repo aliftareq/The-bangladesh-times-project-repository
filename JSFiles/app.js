@@ -22,9 +22,10 @@ const displayCatagory = (catagories) => {
     const newsCatagories = document.getElementById('news-catagories')
     catagories.forEach(catagory => {
         //console.log(catagory)
-        const catagoryName = document.createElement('div');
+        const catagoryName = document.createElement('li');
+        catagoryName.classList.add('nav-item')
         catagoryName.innerHTML = `
-        <p onclick="loadNews('${catagory.category_id}')" class="fw-bold">${catagory.category_name}</p>
+        <p onclick="loadNews('${catagory.category_id}')" class="nav-link active fw-bold" aria-current="page">${catagory.category_name}</p>
         `;
         newsCatagories.appendChild(catagoryName)
     })
@@ -41,6 +42,7 @@ const loadNews = (categoryId) => {
 }
 
 const disPlayNews = (newses) => {
+    toggleSpinner(true)
     //console.log(newses)
     const sortNewses = newses.sort(function (a, b) {
         return a.category_id.localeCompare(b.category_id) || b.total_view - a.total_view;
@@ -98,6 +100,18 @@ const disPlayNews = (newses) => {
         `
         newsContainer.appendChild(newsDiv)
     })
+    toggleSpinner(false)
 }
+
+const toggleSpinner = (isLoading) => {
+    const loaderSection = document.getElementById('spinner');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
+    else {
+        loaderSection.classList.add('d-none')
+    }
+}
+
 
 loadCatagory()
