@@ -55,7 +55,7 @@ const disPlayNews = (newses) => {
     else {
         newsNumber.innerText = `No news item found for this catagory`
     }
-    const newsContainer = document.getElementById('newContainer')
+    const newsContainer = document.getElementById('newsContainer')
     newsContainer.innerHTML = ``;
     sortNewses.forEach(news => {
         console.log(news)
